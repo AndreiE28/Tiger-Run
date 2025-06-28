@@ -1,99 +1,76 @@
-# 🚀 Astral Rush
+# 🐅 Tiger Run
 
-**Astral Rush** is a fullscreen 2D arcade-style space shooter game built using Python and Pygame. Featuring fast-paced gameplay, dynamic menus, two-player support, and a retro aesthetic, it's an exciting journey through the stars!
-
+**Tiger Run** is a 2D side-scrolling endless runner game built in Python using Pygame. Play as a pixel tiger dashing through the jungle, jumping over obstacles, and leveling up while grooving to retro-style background music!
 
 ## 🎮 Features
 
-- Single-player & two-player modes
-- Bullet dodging and shooting mechanics
-- Progressive difficulty with increasing levels
-- Dynamic enemy spawns and attacks
-- Pause menu and settings
-- Volume control and mute option
-- High score tracking
-- Retro-styled pixel assets and music
-
+- Smooth running and jumping animations
+- Obstacle spawning and collision detection
+- Dynamic level progression (increased difficulty over time)
+- Retro UI with settings, pause, and control menus
+- Background scrolling effect
+- High score saving
+- Custom volume settings for music and SFX
 
 ## 🕹 Controls
 
-### Player 1:
-- **Move**: W / A / S / D or Arrow Keys
-- **Shoot**: SPACE
-- **Pause**: P
-
-### Player 2:
-- **Move**: Arrow Keys
-- **Shoot**: ENTER
-- **Pause**: P
-
+- **Jump**: `SPACE`
+- **Pause**: `ESCAPE`
+- **Menu Navigation**: Mouse
 
 ## 📁 Project Structure
 
 ```
 
-Astral_Rush/
-├── Assets/
-│   ├── Audio/
-│   │   ├── DEAF KEV - Invincible.mp3
-│   │   ├── Explosion.mp3
-│   │   └── Laser.mp3
-│   ├── Fonts/
-│   │   ├── ARCADECLASSIC.TTF
-│   │   └── ArcadeAlternate.ttf
-│   └── Images/
-│       ├── Background.png
-│       ├── enemy.png
-│       ├── explosion_animation#.png
-│       ├── gas.png
-│       ├── icon.png
-│       ├── laser_blue.png
-│       ├── laser_red.png
-│       └── player.png
-├── Astral_Rush.py
+Tiger_Run/
+├── assets/
+│   ├── images/
+│   │   ├── background.png
+│   │   ├── obstacle.png
+│   │   └── tiger_running_animation_#.png
+│   └── sounds/
+│       ├── background_music.mp3
+│       ├── dying_sound.mp3
+│       ├── jump_sound.mp3
+│       ├── landing_sound.mp3
+│       ├── level_up_sound.mp3
+│       └── select.mp3
+├── Tiger Run.py
 └── highscore.txt
 
 ````
-
 
 ## 🛠 Requirements
 
 - Python 3.x
 - Pygame (`pip install pygame`)
 
-
-
 ## 🚀 Running the Game
 
-1. Clone or download the repository.
-2. Ensure all dependencies and asset files are in place.
-3. Run the game:
+1. Download or clone the repo.
+2. Make sure all required assets are in place.
+3. Run the game with:
 
 ```bash
-python Astral_Rush.py
+python "Tiger Run.py"
 ````
-
-**Note**: The game runs in fullscreen mode by default.
 
 
 ## 🧠 How It Works
 
-* The main game loop handles events, updates game state, and renders the screen at 60 FPS.
-* Different menus are drawn conditionally (main, settings, volume, controls).
-* Enemy and player interactions include shooting, hit detection, and explosion animations.
-* Two-player mode allows real-time PvP shooting.
-
+* The game features a loop that switches between menu, gameplay, pause, and game-over states.
+* The tiger has a running and jumping animation handled by separate classes.
+* Obstacle collision ends the run and resets the score.
+* Score and difficulty increase over time, encouraging longer runs.
+* Menus and volume settings are built with a reusable `Button` class.
 
 ## 🎵 Credits
 
-* Music: *"Invincible"* by DEAF KEV via NCS
-* Fonts: ARCADECLASSIC, ArcadeAlternate
-* Assets: Custom and retro-style graphics
-
+* Sound effects & music: Custom / open-source retro game sounds
+* Visuals: Pixel-style art and animations for a vibrant retro experience
 
 ## 📝 License
 
-This game is provided for educational and entertainment purposes. Be sure to replace or properly license the music and font assets if you intend to distribute the game publicly.
+Provided for educational and entertainment use. If redistributing, ensure you have the right to use all sound and graphic assets included.
 
-
-Enjoy the rush! 🌌
+Run fast, jump hard, and don’t look back. 🐅💨
