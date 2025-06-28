@@ -1,6 +1,6 @@
 # 🐅 Tiger Run
 
-[logo](/assets/images/logo_2.png)
+[logo](assets/images/logo_2.png)
 
 **Tiger Run** is a 2D side-scrolling endless runner game built in Python using Pygame. Play as a pixel tiger dashing through the jungle, jumping over obstacles, and leveling up while grooving to retro-style background music!
 
