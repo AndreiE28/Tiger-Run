@@ -1,6 +1,8 @@
 import pygame, random
 from sys import exit
 
+import pygame.display
+
 pygame.init()
 
 #screen
@@ -10,6 +12,7 @@ pygame.display.set_caption("Tiger Run")
 screen_width = info.current_w
 screen_height = info.current_h
 snapshot = screen.copy()
+icon = pygame.display.set_icon("assets/images/icon.ico")
 
 #background
 background = pygame.image.load("assets/images/background.png")
@@ -29,7 +32,7 @@ score = 0
 level = 1
 
 #jump and spawn cooldown
-jump_cooldown = 1000
+jump_cooldown = 1100
 spawn_cooldown = 3100
 last_jump = 0
 last_spawn = 0
@@ -68,11 +71,14 @@ def createObst():
 
 def moveObst(obstacles): #moves the obstacles
 
+    global level
+
     moved_obstacles = []
 
     for surface in obstacles:
-        surface.centerx -= 4 + level
-        moved_obstacles.append(surface)
+        surface.centerx -= min(4 + level, 35)
+        if surface.right > 0:
+            moved_obstacles.append(surface)
 
     return moved_obstacles
 
@@ -230,6 +236,8 @@ class Button:
 
 clock = pygame.time.Clock()
 
+high_score = 0
+
 #main function
 def main():
 
@@ -309,7 +317,7 @@ def menu():
 #game function
 def game():
 
-    global player_y, last_spawn, spawn_cooldown, last_jump, jump_cooldown, background_x, obstacles, player, score, level, font, state, snapshot, background_x, current_time
+    global player_y, last_spawn, spawn_cooldown, last_jump, jump_cooldown, background_x, obstacles, player, score, level, font, state, snapshot, background_x, current_time, high_score, jumping
 
     high_score = load_high_score()
 
@@ -372,17 +380,14 @@ def game():
                 channel1.play(dying_sound)
                 player_y = 435
                 jumping = False
-                score = 0
                 obstacles = []
                 return "game over"
             
         if score > level*100:
             channel1.play(level_up_sound)
-            spawn_cooldown -= 50
+            spawn_cooldown = max(1500, spawn_cooldown - 50)
             level += 1
-
-        if level > 21:
-            level = 21
+            
         
         if current_time - score_last_update >= 100:
             score += 1
@@ -685,13 +690,15 @@ def pause():
 #game over function
 def game_over():
 
-    global background, obstacles, background_x, player_y, jumping, score, background_x
+    global background, obstacles, background_x, player_y, jumping, score, background_x, high_score
 
     overlay = pygame.Surface((1280, 720), pygame.SRCALPHA)
     overlay.fill((0, 0, 0, 150))
 
-    button_restart = Button("Restart", font, screen_width // 2, screen_height // 2)
-    button_menu = Button("Menu", font, screen_width // 2, screen_height // 2 + 50)
+    button_restart = Button("Restart", font, screen_width // 2, screen_height // 2 + 30)
+    button_menu = Button("Menu", font, screen_width // 2, screen_height // 2 + 80)
+
+    final_score = score
 
     while True:
         for event in pygame.event.get():
@@ -716,7 +723,13 @@ def game_over():
         screen.blit(overlay, (0, 0))
 
         text = title_font.render("Game Over", True, (255, 255, 255))
-        screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height//2 - 100))
+        screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height//2 - 150))
+        
+        score_text = font.render(f"Score: {final_score}", True, (255, 255, 255))
+        screen.blit(score_text, (screen_width // 2 - score_text.get_width() // 2, screen_height // 2 - 80))
+
+        high_score_text = font.render(f"High Score: {high_score}", True, (255, 255, 255))
+        screen.blit(high_score_text, (screen_width // 2 - high_score_text.get_width() // 2, screen_height // 2 - 40))
 
         button_menu.draw(screen)
         button_restart.draw(screen)
