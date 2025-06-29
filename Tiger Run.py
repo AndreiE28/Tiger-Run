@@ -12,7 +12,8 @@ pygame.display.set_caption("Tiger Run")
 screen_width = info.current_w
 screen_height = info.current_h
 snapshot = screen.copy()
-icon = pygame.display.set_icon("assets/images/icon.ico")
+icon = pygame.image.load("assets/images/icon.ico").convert()
+pygame.display.set_icon(icon)
 
 #background
 background = pygame.image.load("assets/images/background.png")
